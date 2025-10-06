@@ -2,3 +2,8 @@ Motor : It is a special tool that lets your app talk to the MongoDB database wit
     for a response, keeping everything running smoothly.
 
 googletrans - Used for actual translation (But it is very slow).
+
+Axios : A popular JavaScript library used to easily send HTTP requests (like the POST request) to the backend server.
+
+Core Working of App.js 🌐
+- The app works by managing the user's input, formatting it correctly, sending it to the backend, and displaying the result.
