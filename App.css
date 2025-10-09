@@ -1,0 +1,92 @@
+.App {
+  text-align: center;
+  line-height: 2rem;
+  background-color: rgb(135, 244, 72);
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+
+#txtarea {
+  border-radius: 10px;
+  padding: 8px;
+  margin-top: 5px;
+  width: 95%;
+  resize: vertical;
+  font-size: 14px;
+}
+
+#select {
+  border-radius: 10px;
+  padding: 5px 8px;
+  background-color: rgb(159, 159, 238);
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+#btn {
+  background-color: rgb(54, 232, 54);
+  border-radius: 21px;
+  padding: 8px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#btn:disabled {
+  background-color: lightgreen;
+  cursor: not-allowed;
+}
+
+button.add-remove-btn {
+  background-color: rgb(255, 99, 71);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 4px 8px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+button.add-remove-btn:hover {
+  background-color: rgb(255, 69, 0);
+}
+
+.valid-json {
+  border: 2px solid green;
+  border-radius: 10px;
+  padding: 8px;
+  width: 95%;
+}
+
+.invalid-json {
+  border: 2px solid red;
+  border-radius: 10px;
+  padding: 8px;
+  width: 95%;
+}
+
+label {
+  font-weight: bold;
+}
+
+textarea {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  margin-top: 2rem;
+}
+
+#form-section, #json-section, #language-section, #translate-btn {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.translated-output {
+  margin-top: 2rem;
+  text-align: left;
+}
