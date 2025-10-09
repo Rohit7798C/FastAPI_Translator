@@ -1,25 +1,46 @@
 import React, { useState } from "react";
+// Imports the core React library and the 'useState' Hook, which lets you store
+// and manage data that changes over time in your component.
+
 import axios from "axios";
+// Imports 'axios', a popular JavaScript library used to easily send HTTP requests
+// (like the POST request) to the backend server.
+
 import "./App.css";
 
 function App() {
   const [mode, setMode] = useState("form"); // "form" | "json"
+  // State for tracking whether the user is using the multiple-text 'form' input or the raw 'json' input.
+
   const [texts, setTexts] = useState([{ id: 1, value: "" }]); // Dynamic array of statements
+  // State that holds the array of individual text inputs when in 'form' mode. It starts with one empty box.
+
   const [jsonInput, setJsonInput] = useState("");
+  // State to store the raw text entered by the user in the 'JSON Input' box.
+
   const [isJsonValid, setIsJsonValid] = useState(true);
+  // State to track if the text in the 'JSON Input' box is properly formatted JSON.
+
   const [targetLanguage, setTargetLanguage] = useState("hindi");
+  // State to store the language the user wants to translate the text into (e.g., "hindi").
+
   const [translatedText, setTranslatedText] = useState({});
+  // State to store the translated result (an object) received back from the backend API.
+
   const [loading, setLoading] = useState(false);
+  // State to track if a translation request is currently being processed, used to show "Translating..." and disable the button.
 
   // Update value for a specific statement
   const handleChange = (id, newValue) => {
     setTexts(texts.map(t => (t.id === id ? { ...t, value: newValue } : t)));
   };
+  // Finds a text box by its ID and updates its content (value) in the 'texts' state.
 
   // Add a new statement
   const handleAdd = () => {
     setTexts([...texts, { id: texts.length + 1, value: "" }]);
   };
+  // Adds a new, empty text box to the list for the user to type in.
 
   // Remove a statement and renumber IDs
   const handleRemove = (id) => {
@@ -27,12 +48,13 @@ function App() {
     const renumbered = updated.map((t, index) => ({ ...t, id: index + 1 }));
     setTexts(renumbered);
   };
+  // Removes a text box and then re-assigns simple sequential IDs (1, 2, 3...) to the remaining boxes.
 
   // JSON Mode Function
   const handleJsonChange = (e) => {
     const value = e.target.value;
     setJsonInput(value);
-    // Updates the JSON input state.
+    // Stores the raw text from the JSON textarea into the 'jsonInput' state.
 
     try {
       // Validates the JSON → sets isJsonValid to false if invalid.
@@ -48,14 +70,18 @@ function App() {
   // Triggered when the Translate button is clicked.
   const handleTranslate = async () => {
     setLoading(true);
+    // Sets loading state to true to show the user a process is running.
     try {
       let payloadText = {};
+      // Initializes an empty object that will hold the text data to be sent to the backend.
 
       if (mode === "form") {
         // Convert array to object: key1, key2, ...
         texts.forEach((t, index) => {
           payloadText[`key${index + 1}`] = t.value;
         });
+        // If in 'form' mode, it converts the array of texts into an object
+        // where the keys are 'key1', 'key2', etc. (as required by the FastAPI/Pydantic model).
       } else {
         // Parses JSON mode input if selected.
         try {
@@ -85,13 +111,18 @@ function App() {
       alert("Translation failed. Check console for details.");
     }
     setLoading(false);
+    // Sets loading state back to false to enable the button again.
   };
 
+
+  // UI Rendering (return)
+  // The return block is what actually draws the elements on the web page:
   return (
     <div className="App" style={{ padding: "4rem", fontFamily: "Arial" }}>
       <h1>FastAPI Translator</h1>
 
       {/* Mode Toggle */}
+      {/* Displays the two radio buttons to switch between "Form Input" and "JSON Input" modes. */}
       <div style={{ marginBottom: "1rem" }}>
         <label>
           <input
